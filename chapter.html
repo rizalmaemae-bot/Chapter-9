@@ -1,0 +1,2248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>K & R — Our Story</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Parisienne&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   GENERAL
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f5eee6;
+    color:#5c4635;
+    font-family:'Poppins', sans-serif;
+    overflow-x:hidden;
+}
+
+
+/* =========================
+   K & R LOGO
+========================= */
+
+#logoScreen{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle, #fffaf5, #e2cdbb);
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:1s ease;
+}
+
+.logo-container{
+    text-align:center;
+}
+
+.kr-logo{
+    width:190px;
+    height:190px;
+    border:2px solid #8b6a53;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    margin:auto;
+    animation:floatLogo 3s ease-in-out infinite;
+    box-shadow:
+        0 0 0 10px rgba(139,106,83,.08),
+        0 20px 40px rgba(80,50,30,.15);
+}
+
+.kr-logo::before{
+    content:"✦";
+    position:absolute;
+    top:-15px;
+    right:20px;
+    font-size:25px;
+    color:#9a765c;
+}
+
+.kr-logo::after{
+    content:"✦";
+    position:absolute;
+    bottom:-15px;
+    left:20px;
+    font-size:20px;
+    color:#9a765c;
+}
+
+.kr-letters{
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+
+.k{
+    font-family:'Cormorant Garamond', serif;
+    font-size:105px;
+    font-weight:600;
+    color:#634634;
+    transform:translateX(12px);
+}
+
+.r{
+    font-family:'Parisienne', cursive;
+    font-size:115px;
+    color:#9a765c;
+    transform:translateX(-15px) translateY(8px);
+}
+
+.logo-title{
+    margin-top:28px;
+    font-family:'Cormorant Garamond', serif;
+    font-size:25px;
+    letter-spacing:8px;
+}
+
+.logo-subtitle{
+    margin-top:10px;
+    font-size:10px;
+    letter-spacing:4px;
+    color:#9a765c;
+}
+
+.logo-loading{
+    margin-top:35px;
+    font-size:10px;
+    letter-spacing:3px;
+    animation:pulse 2s infinite;
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+#intro{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:9998;
+    background:
+        radial-gradient(circle at center,#fffaf5,#e6d1bd);
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px;
+}
+
+.intro-content{
+    max-width:650px;
+    animation:appear 1.5s ease;
+}
+
+.intro-small{
+    font-size:10px;
+    letter-spacing:5px;
+    color:#9a765c;
+    margin-bottom:20px;
+}
+
+.intro-content h1{
+    font-family:'Parisienne', cursive;
+    font-size:75px;
+    font-weight:400;
+    color:#6b4f3b;
+}
+
+.intro-content p{
+    font-family:'Cormorant Garamond', serif;
+    font-size:23px;
+    line-height:1.7;
+    margin-top:20px;
+}
+
+.enter-btn{
+    margin-top:35px;
+    padding:15px 35px;
+    border:none;
+    border-radius:40px;
+    background:#6b4f3b;
+    color:white;
+    letter-spacing:2px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.enter-btn:hover{
+    transform:scale(1.07);
+}
+
+
+/* =========================
+   PASSWORD
+========================= */
+
+#lockScreen{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:9997;
+    background:#eee0d3;
+    align-items:center;
+    justify-content:center;
+}
+
+.lock-box{
+    width:90%;
+    max-width:400px;
+    text-align:center;
+    padding:45px 35px;
+    background:#fffaf5;
+    border-radius:25px;
+    box-shadow:0 20px 50px rgba(80,50,30,.15);
+}
+
+.lock-icon{
+    font-size:50px;
+}
+
+.lock-box h2{
+    font-family:'Cormorant Garamond', serif;
+    font-size:35px;
+    margin:15px 0;
+}
+
+.lock-box p{
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.lock-box input{
+    width:100%;
+    padding:14px;
+    border-radius:30px;
+    border:1px solid #c9ab91;
+    outline:none;
+    text-align:center;
+}
+
+.lock-box button{
+    width:100%;
+    margin-top:15px;
+    padding:13px;
+    border:none;
+    border-radius:30px;
+    background:#6b4f3b;
+    color:white;
+    cursor:pointer;
+}
+
+#error{
+    margin-top:12px;
+    font-size:12px;
+    color:#b45f5f;
+}
+
+
+/* =========================
+   MAIN WEBSITE
+========================= */
+
+#main{
+    display:none;
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:50px 20px;
+    background:
+        radial-gradient(circle,#fdf8f2,#e8d3bf);
+}
+
+.hero-content{
+    max-width:700px;
+}
+
+.hero-small{
+    font-size:10px;
+    letter-spacing:5px;
+    color:#9a765c;
+}
+
+.hero h1{
+    font-family:'Parisienne', cursive;
+    font-size:90px;
+    font-weight:400;
+    margin-top:15px;
+}
+
+.hero p{
+    font-family:'Cormorant Garamond', serif;
+    font-size:24px;
+    line-height:1.7;
+    margin-top:20px;
+}
+
+.explore-btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:14px 30px;
+    border-radius:30px;
+    background:#6b4f3b;
+    color:white;
+    text-decoration:none;
+    font-size:12px;
+}
+
+
+/* =========================
+   CHAPTER SECTION
+========================= */
+
+#chapters{
+    padding:100px 8%;
+    background:#f5eee6;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-title h2{
+    font-family:'Cormorant Garamond', serif;
+    font-size:55px;
+    font-weight:500;
+}
+
+.section-title p{
+    margin-top:10px;
+    color:#96745c;
+    font-size:13px;
+}
+
+.chapter-grid{
+    max-width:1050px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:25px;
+}
+
+
+/* CHAPTER CARD */
+
+.chapter-card{
+    height:230px;
+    border:none;
+    background:#e7d4c1;
+    border-radius:20px;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    transition:.4s;
+    box-shadow:0 10px 25px rgba(80,50,30,.08);
+}
+
+.chapter-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(80,50,30,.18);
+}
+
+.chapter-card::before{
+    content:"✦";
+    position:absolute;
+    top:18px;
+    right:22px;
+    font-size:20px;
+    color:#9a765c;
+}
+
+.chapter-card::after{
+    content:"";
+    position:absolute;
+    width:170px;
+    height:170px;
+    border:1px solid rgba(107,79,59,.15);
+    border-radius:50%;
+    bottom:-100px;
+    left:-60px;
+}
+
+.chapter-content{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    z-index:2;
+    padding:20px;
+}
+
+.chapter-number{
+    font-size:10px;
+    letter-spacing:4px;
+    color:#9a765c;
+}
+
+.chapter-card h3{
+    font-family:'Cormorant Garamond', serif;
+    font-size:30px;
+    font-weight:500;
+    margin-top:12px;
+}
+
+.open-text{
+    margin-top:18px;
+    font-size:9px;
+    letter-spacing:3px;
+}
+
+
+/* =========================
+   LETTER MODAL
+========================= */
+
+.chapter-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:20000;
+    background:rgba(50,35,25,.72);
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    backdrop-filter:blur(5px);
+}
+
+.chapter-letter{
+    width:100%;
+    max-width:700px;
+    max-height:85vh;
+    overflow-y:auto;
+    position:relative;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #fffdf9,
+            #f6eadc
+        );
+
+    padding:65px 60px;
+    border-radius:8px;
+
+    box-shadow:0 30px 80px rgba(0,0,0,.35);
+
+    animation:letterOpen .5s ease;
+}
+
+.chapter-letter h2{
+    font-family:'Parisienne', cursive;
+    font-size:55px;
+    font-weight:400;
+}
+
+.letter-small{
+    font-size:10px;
+    letter-spacing:4px;
+    color:#9a765c;
+    margin-bottom:15px;
+}
+
+.letter-date{
+    margin-top:10px;
+    margin-bottom:30px;
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    font-style:italic;
+    color:#9a765c;
+}
+
+.letter-content{
+    font-family:'Cormorant Garamond', serif;
+    font-size:21px;
+    line-height:1.8;
+    white-space:pre-line;
+}
+
+.close-chapter{
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:50%;
+    background:#e3cdb8;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.close-chapter:hover{
+    background:#6b4f3b;
+    color:white;
+}
+
+
+/* =========================
+   GAME
+========================= */
+
+#game{
+    padding:100px 8%;
+    background:#e9d7c5;
+}
+
+.game-box{
+    max-width:600px;
+    margin:auto;
+    padding:45px;
+    background:#fffaf5;
+    border-radius:25px;
+    text-align:center;
+}
+
+.game-box h3{
+    font-family:'Cormorant Garamond', serif;
+    font-size:35px;
+}
+
+.game-options button{
+    width:100%;
+    padding:13px;
+    margin-top:12px;
+    border:none;
+    border-radius:15px;
+    background:#e5d0bb;
+    cursor:pointer;
+}
+
+.game-options button:hover{
+    background:#9a765c;
+    color:white;
+}
+
+#gameResult{
+    margin-top:20px;
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+.final{
+    min-height:80vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:50px 20px;
+    background:#d9bea7;
+}
+
+.final h1{
+    font-family:'Parisienne', cursive;
+    font-size:75px;
+}
+
+.final p{
+    max-width:650px;
+    margin:20px auto;
+    font-family:'Cormorant Garamond', serif;
+    font-size:23px;
+    line-height:1.7;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes floatLogo{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+@keyframes pulse{
+    0%,100%{
+        opacity:.4;
+    }
+
+    50%{
+        opacity:1;
+    }
+}
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes letterOpen{
+    from{
+        opacity:0;
+        transform:scale(.8) translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+    .chapter-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero h1{
+        font-size:70px;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .chapter-grid{
+        grid-template-columns:1fr;
+    }
+
+    .chapter-letter{
+        padding:55px 30px;
+    }
+
+    .chapter-letter h2{
+        font-size:45px;
+    }
+
+    .letter-content{
+        font-size:19px;
+    }
+
+    .intro-content h1{
+        font-size:60px;
+    }
+
+}
+
+/* =========================================
+   TINY GAMES
+========================================= */
+
+#game{
+    padding:110px 8%;
+    background:#e9d7c5;
+    min-height:100vh;
+}
+
+.game-score{
+    text-align:center;
+    margin:25px auto;
+    font-size:11px;
+    letter-spacing:4px;
+    color:#8b6a53;
+}
+
+#score{
+    font-family:'Cormorant Garamond', serif;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.game-box{
+    max-width:650px;
+    margin:35px auto;
+    padding:50px 45px;
+    background:#fffaf5;
+    border-radius:25px;
+    text-align:center;
+
+    box-shadow:
+        0 20px 50px rgba(80,50,30,.12);
+
+    position:relative;
+}
+
+.game-number{
+    font-size:10px;
+    letter-spacing:5px;
+    color:#a08068;
+    margin-bottom:20px;
+}
+
+.game-box h3{
+    font-family:'Cormorant Garamond', serif;
+    font-size:38px;
+    font-weight:500;
+    color:#604735;
+}
+
+.game-hint{
+    margin-top:10px;
+    color:#a08068;
+    font-size:12px;
+}
+
+.game-options{
+    margin-top:30px;
+}
+
+.game-options button{
+    width:100%;
+    display:block;
+
+    padding:15px 20px;
+    margin:12px 0;
+
+    border:none;
+    border-radius:15px;
+
+    background:#e5d0bb;
+    color:#4f392b;
+
+    font-family:'Poppins', sans-serif;
+    font-size:13px;
+
+    cursor:pointer;
+    transition:.3s;
+}
+
+.game-options button:hover{
+    transform:translateY(-3px);
+    background:#c9aa91;
+    color:white;
+
+    box-shadow:
+        0 8px 20px rgba(80,50,30,.12);
+}
+
+.game-options button:disabled{
+    cursor:not-allowed;
+    opacity:.7;
+}
+
+#gameResult{
+    min-height:30px;
+    margin-top:20px;
+
+    font-family:'Cormorant Garamond', serif;
+    font-size:22px;
+}
+
+.next-game-btn{
+    margin-top:25px;
+
+    border:none;
+    border-radius:30px;
+
+    padding:14px 30px;
+
+    background:#6b4f3b;
+    color:white;
+
+    letter-spacing:2px;
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.next-game-btn:hover{
+    transform:scale(1.05);
+}
+
+
+/* =========================================
+   VIDEO POPUP
+========================================= */
+
+#gameVideoModal{
+    display:none;
+
+    position:fixed;
+    inset:0;
+
+    z-index:50000;
+
+    background:rgba(50,35,25,.78);
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    backdrop-filter:blur(7px);
+}
+
+.video-card{
+    width:100%;
+    max-width:650px;
+
+    background:#fffaf5;
+
+    border-radius:25px;
+
+    padding:35px;
+
+    text-align:center;
+
+    position:relative;
+
+    animation:videoPop .45s ease;
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.3);
+}
+
+.video-close{
+    position:absolute;
+
+    right:18px;
+    top:15px;
+
+    width:38px;
+    height:38px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#e5d0bb;
+
+    font-size:23px;
+
+    color:#6b4f3b;
+
+    cursor:pointer;
+
+    z-index:2;
+}
+
+.video-close:hover{
+    background:#6b4f3b;
+    color:white;
+}
+
+#videoEmoji{
+    font-size:45px;
+    margin-bottom:5px;
+}
+
+#videoTitle{
+    font-family:'Parisienne', cursive;
+    font-size:48px;
+    font-weight:400;
+
+    color:#6b4f3b;
+
+    margin-bottom:20px;
+}
+
+#resultVideo{
+    width:100%;
+    max-height:350px;
+
+    border-radius:15px;
+
+    background:#e5d0bb;
+
+    object-fit:contain;
+}
+
+#videoMessage{
+    font-family:'Cormorant Garamond', serif;
+    font-size:21px;
+
+    margin-top:20px;
+
+    color:#6b4f3b;
+}
+
+.continue-btn{
+    margin-top:20px;
+
+    padding:13px 28px;
+
+    border:none;
+    border-radius:30px;
+
+    background:#6b4f3b;
+    color:white;
+
+    cursor:pointer;
+
+    letter-spacing:2px;
+}
+
+@keyframes videoPop{
+
+    from{
+        opacity:0;
+        transform:scale(.75) translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+    }
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+    .game-box{
+        padding:40px 22px;
+    }
+
+    .game-box h3{
+        font-size:30px;
+    }
+
+    .video-card{
+        padding:25px 18px;
+    }
+
+    #videoTitle{
+        font-size:40px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     K & R LOGO
+========================= -->
+
+<div id="logoScreen">
+
+    <div class="logo-container">
+
+        <div class="kr-logo">
+
+            <div class="kr-letters">
+                <span class="k">K</span>
+                <span class="r">R</span>
+            </div>
+
+        </div>
+
+        <div class="logo-title">
+            K & R
+        </div>
+
+        <div class="logo-subtitle">
+            A LITTLE WORLD OF MEMORIES
+        </div>
+
+        <div class="logo-loading">
+            CREATED WITH LOVE
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     INTRO
+========================= -->
+
+<div id="intro">
+
+    <div class="intro-content">
+
+        <div class="intro-small">
+            A PRIVATE PLACE • MADE FOR YOU
+        </div>
+
+        <h1>Before You Enter...</h1>
+
+        <p>
+            I want you to know that i will never get tired of you My love. 
+            I hope you will enjoy this coding that i made kahit na im not really good
+            at designing them. ILOVEYOUSOMUCHH WIFEYY
+        </p>
+
+        <button class="enter-btn" onclick="showLock()">
+            LET'S GO LOVEY 🤎
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     PASSWORD
+========================= -->
+
+<div id="lockScreen">
+
+    <div class="lock-box">
+
+        <div class="lock-icon">🔐</div>
+
+        <h2>This place is private.</h2>
+
+        <p>Only one person knows the secret key.</p>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter password"
+        >
+
+        <button onclick="checkPassword()">
+            Unlock
+        </button>
+
+        <div id="error"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MAIN WEBSITE
+========================= -->
+
+<div id="main">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-small">
+            WELCOME TO OUR LITTLE STORY
+        </div>
+
+        <h1>Hello, My Love.</h1>
+
+        <p>
+            Some memories are too beautiful to leave behind, and some feelings are too important to remain unspoken. 
+             So I gathered a few pieces of my heart and placed them here, hoping that whenever you find them,
+             you'll remember not only what happened, but how it felt to be there.
+        </p>
+
+        <a href="#chapters" class="explore-btn">
+            START READING ↓
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- CHAPTERS -->
+
+<section id="chapters">
+
+    <div class="section-title">
+
+        <h2>Our Story, By Chapters</h2>
+
+        <p>
+            Click a chapter and open the letter inside.
+        </p>
+
+    </div>
+
+
+    <div class="chapter-grid">
+
+
+        <button class="chapter-card" onclick="openChapter('chapter1')">
+            <div class="chapter-content">
+                <div class="chapter-number">CHAPTER 01</div>
+                <h3>The Beginning</h3>
+                <div class="open-text">OPEN LETTER →</div>
+            </div>
+        </button>
+
+
+        <button class="chapter-card" onclick="openChapter('chapter2')">
+            <div class="chapter-content">
+                <div class="chapter-number">CHAPTER 02</div>
+                <h3>Still New</h3>
+                <div class="open-text">OPEN LETTER →</div>
+            </div>
+        </button>
+
+
+        <button class="chapter-card" onclick="openChapter('chapter3')">
+            <div class="chapter-content">
+                <div class="chapter-number">CHAPTER 03</div>
+                <h3>Getting Closer</h3>
+                <div class="open-text">OPEN LETTER →</div>
+            </div>
+        </button>
+
+
+        <button class="chapter-card" onclick="openChapter('chapter4')">
+            <div class="chapter-content">
+                <div class="chapter-number">CHAPTER 04</div>
+                <h3>The Little Things</h3>
+                <div class="open-text">OPEN LETTER →</div>
+            </div>
+        </button>
+
+
+        <button class="chapter-card" onclick="openChapter('chapter5')">
+            <div class="chapter-content">
+                <div class="chapter-number">CHAPTER 05</div>
+                <h3>Memories</h3>
+                <div class="open-text">OPEN LETTER →</div>
+            </div>
+        </button>
+
+
+        <button class="chapter-card" onclick="openChapter('chapter6')">
+            <div class="chapter-content">
+                <div class="chapter-number">CHAPTER 06</div>
+                <h3>Hated Chapter?</h3>
+                <div class="open-text">OPEN LETTER →</div>
+            </div>
+        </button>
+
+
+        <button class="chapter-card" onclick="openChapter('chapter7')">
+            <div class="chapter-content">
+                <div class="chapter-number">CHAPTER 07</div>
+                <h3>Survived</h3>
+                <div class="open-text">OPEN LETTER →</div>
+            </div>
+        </button>
+
+
+        <button class="chapter-card" onclick="openChapter('chapter8')">
+            <div class="chapter-content">
+                <div class="chapter-number">CHAPTER 08</div>
+                <h3>Right Here, Right Now</h3>
+                <div class="open-text">OPEN LETTER →</div>
+            </div>
+        </button>
+
+
+        <button class="chapter-card" onclick="openChapter('chapter9')">
+            <div class="chapter-content">
+                <div class="chapter-number">CHAPTER 09</div>
+                <h3>To Be Continued...</h3>
+                <div class="open-text">OPEN LETTER →</div>
+            </div>
+        </button>
+
+
+    </div>
+
+</section>
+
+
+<!-- GAME -->
+
+<!-- =========================================
+     TINY GAMES
+========================================= -->
+
+<section id="game">
+
+    <div class="section-title">
+        <div class="hero-small">A LITTLE INTERRUPTION ♡</div>
+
+        <h2>Tiny Games</h2>
+
+        <p>
+            Okay... let's see how well you know me. 🤎
+        </p>
+    </div>
+
+
+    <!-- SCORE -->
+
+    <div class="game-score">
+        SCORE:
+        <span id="score">0</span> / 5
+    </div>
+
+
+    <!-- GAME CARD -->
+
+    <div class="game-box" id="gameBox">
+
+        <div class="game-number" id="gameNumber">
+            GAME 01
+        </div>
+
+        <h3 id="question">
+            What do I treasure the most?
+        </h3>
+
+        <p class="game-hint" id="hint">
+            Choose carefully... 👀
+        </p>
+
+
+        <div class="game-options" id="options">
+
+            <button onclick="answer(0)">
+                Our memories together 🤎
+            </button>
+
+            <button onclick="answer(1)">
+                Expensive things
+            </button>
+
+            <button onclick="answer(2)">
+                My phone
+            </button>
+
+            <button onclick="answer(3)">
+                Nothing
+            </button>
+
+        </div>
+
+
+        <div id="gameResult"></div>
+
+
+        <button
+            id="nextGame"
+            class="next-game-btn"
+            onclick="nextGame()"
+            style="display:none;"
+        >
+            NEXT GAME →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     VIDEO RESULT POPUP
+========================================= -->
+
+<div id="gameVideoModal">
+
+    <div class="video-card">
+
+        <button
+            class="video-close"
+            onclick="closeVideo()"
+        >
+            ×
+        </button>
+
+
+        <div id="videoEmoji">
+            🥳
+        </div>
+
+
+        <h2 id="videoTitle">
+            YEHEYYYY!
+        </h2>
+
+
+        <video
+            id="resultVideo"
+            controls
+            playsinline
+        >
+            <source id="videoSource" src="" type="video/mp4">
+        </video>
+
+
+        <p id="videoMessage">
+            YOU GOT IT RIGHT! 🤎
+        </p>
+
+
+        <button
+            class="continue-btn"
+            onclick="continueAfterVideo()"
+        >
+            CONTINUE →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- FINAL -->
+
+<section class="final">
+
+    <div>
+
+        <h1>To Be Continued...</h1>
+
+        <p>
+            Maybe some of my letters or most of it are paulit ulit lang, but known that everytime na sinasabi ko yun, Im genuine.
+            thank you love for being by my side for almost a year na. for supporting me and making me happy every single time.
+            Thank you for those unforgettable moments that i wish to recall all over again hanggang sa magsawa na ako. ILOVEEEYOUUUSOMUCHHH PO.
+            I wish to give you everything that you deserve today, tomorrow and everyy lifetime. IM SO PROUD OF YOUU PO for every achievement na nagawa mo.
+            Im so proud of you for doing your best at anything and at anytime. Wag ka pong mapapagod sakin love kahit kailan HAHWHHWHAH I wont get tired of
+            you naman po so easily. Even on our hard days po i will still choose to stay rather than to leave a special person to me.
+            Im hoping and wishing to build a successful family po with you. No matter you like it or not, ako top baby.
+            ILOVEEEYOUUSOMUCHHH PO. You dont have to "tapatan" me just because i made gifts. hindi ko kasi afford ung mamahaling pera kaya binabawi
+            ko sa letters. HAHWAHHHAHWHAHAHH with you po, I know i can achieve anything na iniisip kong di ko kaya. and alam kong ikaw din.
+            ikaw yann ehh. IM SO PROUDD OF YOUUU. ILOVEYOUUUSOMUCHHHHH po
+        </p>
+
+    </div>
+
+</section>
+
+
+</div>
+
+
+<!-- =========================
+     CHAPTER LETTERS
+========================= -->
+
+
+<div class="chapter-modal" id="chapter1">
+
+    <div class="chapter-letter">
+
+        <button class="close-chapter" onclick="closeChapter('chapter1')">×</button>
+
+        <div class="letter-small">CHAPTER ONE</div>
+
+        <h2>The Beginning</h2>
+
+        <div class="letter-date">
+            Where everything started...
+        </div>
+
+        <div class="letter-content">
+HAIII!!!
+HAPPY FIRSTT MONTHSARRY!!
+
+Latee message na ba? Kagabi ko to ginawa eh
+Anywayss, Happy first monthh po. 
+I don't know how to write a Long sweet message po but sana enough na tong mga sasabihin ko for you.
+First of all, thank youu for everythingg... Lagi po akong nag thathankyou kasii lagi kang nandyan for me....
+Thank you for supporting me, for loving me and for always listening to all my rantss.
+Thank you kasii nag exist ka.
+Thank you dahil dumating ka sa buhay ko.
+Thank you dahil pinaparamdam mo sakin lahat ng mga bagay na di ko nararamdaman noon.
+
+I cannot believe na 1 month na tayo HAHA.
+Parang dati lang na iilang pa ako sa i love you mo tapos ngayon gusto ko nalng mag sabi ng i love you bawat segundo ehh
+
+I LOVEE YOUU PO.
+I LOVEE YOUUU SO MUCHH.
+
+Di ko na ma imagine sarili ko ng wala ka eh, alam kong oa yun pero yes.
+
+I'm sorry if sometimes di ko nagagawa or nabibigay mga bagay na gusto mo po.
+Sana maging mahaba prin yang pasensya mo sakin sa mga susunod na araw haaa.
+
+I'm trying my best po to be the best version of me pag dating sa relationship. Sana naman nagagawa ko ung best ko😌
+
+Anyways, don't stress yourself too much po. Wag ka rin magpagutom lagi, laloo na ung pagpupuyatt na yann kasi ako po ay nag aalala. 
+Baka magkasakit ka nyan.
+
+I hope po in the future na kasama parin kita. Sana hindi po mabago lahatt.
+Wagg ka mapapagod sa relationshipp haaa. Tell me, tell me!!
+Chariz
+
+Ahyunn, sabi ko sayo hindi ako marunong mag Long sweet message ehhh pero yess.
+Happy 1st Monthsarryy. 
+If something is bothering you po or if ever na may problem ka, you can always come up to me at magsabi sakinn kung ano man po yun dahil ready po ako makinig sa lahat. Don't keep your problems sa sarili mo lang. 
+
+Andd also, sometimes po kahit pagod kanaa sinasabi mong hindi🙄 dii pidii yunn. Stop saying you're okay din kahit na hindi namann. Stopp it😣 
+
+Ayoko din po magkaroon tayo ng misunderstanding kaya plss sabihin mo sakin if may problem ka sakinn ahhh or sa way ng pag aact ko..
+
+Sorry po iff di ko napapa feel sayo minsann na Gf kita everytime na nasa labas tayo. Di pa sanay eh.
+Wag moko tawanann.
+
+Ohhh additionn. hindi naman po ako nagi selos dun sa boy so you don't need to ano, to stay away from him. Nakss english.
+I don't have problems po when it comes to your boy na friends or girl man yan kasi may tiwala naman po ako sayo.
+I hope na ikaww dinn..
+
+And when it comes sa pag babawal, hindi po kita pinagbabawalan sa kahitt na ano ehh. Wagg lang mapasobra. Ouu na wagg kana magalit sakin.
+Ayoko lang na nafefeel mo na kinocontrol kita, nag aalala lang rin ako sayo.
+
+Ayunn langg po. MAG BREAKFASTT KANA PO AH
+I LOVEE YOU VERY MUCHH PO.
+NEVER AKO GIGISING NA HINDI NA KITA MAHAL KASI ARAW ARAW AKONG GIGISING NA IKAW UNG NASA ISIP KO.
+Gabi gabi akong mananaginip ng tayo.
+
+BABYEE I LOVEE YOUU😘
+
+Baka sa personal may masabi ako
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="chapter-modal" id="chapter2">
+
+    <div class="chapter-letter">
+
+        <button class="close-chapter" onclick="closeChapter('chapter2')">×</button>
+
+        <div class="letter-small">CHAPTER TWO</div>
+
+        <h2>Unsaid memories</h2>
+
+        <div class="letter-date">
+            Memories?
+        </div>
+
+        <div class="letter-content">
+        HAPPYY MONTHHSARRY DIN PO,
+         I LOVEE YOUU SO MUCHHH AND THANKK YOUU FOR ALL😘😘😘
+
+         Maybe i didnt get the chance to say a long message nung 2nd monthsarry natin, 
+         but i know for sure that nung time na un, i dont know what to say except for 
+         being grateful to have you in my life so....... forgivee me love.
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="chapter-modal" id="chapter3">
+
+    <div class="chapter-letter">
+
+        <button class="close-chapter" onclick="closeChapter('chapter3')">×</button>
+
+        <div class="letter-small">CHAPTER THREE</div>
+
+        <h2>Getting bolder</h2>
+
+        <div class="letter-date">
+            Somewhere along the way...
+        </div>
+
+        <div class="letter-content">
+HAPPY 3RD MONTHSARRY AND VALENTINESS PO
+
+
+I cant also find the long message po if may ginawa akong long message HAHAHAH
+anyways, siugro if i can turn back the timme, tatadtarin kita ng message na di mo maintindihan
+pero atleast galing sakin. to make you feel na na aappreciate kita and that grateful ako na 
+nag exist ka sa buhay ko from my classmate, to my BEAUTIFULLLL GIRLFRIEND.
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="chapter-modal" id="chapter4">
+
+    <div class="chapter-letter">
+
+        <button class="close-chapter" onclick="closeChapter('chapter4')">×</button>
+
+        <div class="letter-small">CHAPTER FOUR</div>
+
+        <h2>Favorite words</h2>
+
+        <div class="letter-date">
+            Things you probably don't notice...
+        </div>
+
+        <div class="letter-content">
+Hi po, I just want to say HAPPY 4TH MONTHSARRY to us❣️
+
+Thank you sa pagtitiis mo sakin HAHAHA And thank you for all the unforgettable month that i got to spend kasama ka. I'm always here for you po whenever you need me.
+ I'm sorry if sometimes hindi ko napaparamdam sayo ung mga bagay na gusto/ dapat mong maramdaman. 
+ I'm sorry if na fefeel mo sometimes na di ka important sakin (Don't deny it) pero you're important po for me (Super).
+ I hope habaan mopa pasensya mo sakin if kaya mo pa HAHA. Thankk youu so muchhh And
+ I LOVEE YOUUU MOREER THAN THE WORDS THAT COME OUT OF MY MOUTH. 
+ Sometimes i feel like lagi nalng nasakin ung kwento. Na baka, iniisip mo na puro nalng ako. Hindii ko na nga uulitinn ih.
+ Anyways, I know na maraming problems sakin when it comes to relationship.
+ Sana po masabi mo sakinn kahit ano pa man yan. I don't care if masaktan ako o hindi. Basta masabi molng.
+ I LOVEE YOU SO VERY MUCHH..
+ Thank you for all the things na ginawa/nagawa mo for me. Thank you for supporting me in everything..
+ Di ako marunong long message ehh, pero ayun HAHA I'm always so proud of you po sa lahat ng achievements mo.
+ Angg galingg mo superrr
+ And I'm really looking forward to being with you in the future. Sana marami pa tayong monthsary lalo na Anniversarry 
+ HAHAHA na ma celebrate together, and more memories na magagawa, at mas lalo pa natin maintindihan ang isa't isa.
+ I'm really happy na ikaw yung kasama ko ngayon, and I hope ikaw parin hanggang sa future.
+
+ Honestly, di ko na ma imagine yung sarili ko na wala ka sa buhay ko. You're very important to me po and
+ I'm really grateful na ikaw yung meron ako ngayon.
+ know I'm not a perfect partner that someone could have, pero promise,  I'm really trying my best para mapasaya ka.
+ I may not always do things right, pero please know na totoo lahat ng nararamdaman ko sayo.
+ I'm always willing to learn and improve, and ofc ayusin yung mga mali ko para maging better partner sayo.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="chapter-modal" id="chapter5">
+
+    <div class="chapter-letter">
+
+        <button class="close-chapter" onclick="closeChapter('chapter5')">×</button>
+
+        <div class="letter-small">CHAPTER FIVE</div>
+
+        <h2>cant find the memories</h2>
+
+        <div class="letter-date">
+            5th celebration
+        </div>
+
+        <div class="letter-content">
+Loveee wag ka mag sawa sa mga message ko na paulit ulit, it's my way
+ of reminding you how much i truly love and appreciate you HEHE
+Do well po sa duty mo today, I hope mag enjoy ka!!! 
+Kumain ka po ng maayos and stay dehydratedd dahil sobrang hot na ng day.
+Don't pressure and stress yourself too much po.
+
+love maybe mababasa mo ung long message ko nung time na toh, I cant seem to find it po in my messages
+but i know for sure that i had a long message that i sent po sayo. pleasee know na kahit
+paulit ullit sya, galing padin yan sa hypothalamus ko haaa. ILOVEEEYOUUSOMCUHH
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="chapter-modal" id="chapter6">
+
+    <div class="chapter-letter">
+
+        <button class="close-chapter" onclick="closeChapter('chapter6')">×</button>
+
+        <div class="letter-small">CHAPTER SIX</div>
+
+        <h2>6TH MONTH </h2>
+
+        <div class="letter-date">
+            The words I kept...
+        </div>
+
+        <div class="letter-content">
+HAPPY 6TH MONTHSARRYYY!! Kung thankful ka sakin, mas thankful ako. Ikaw na lang kasi nakakapag pasaya sakin ehhh.
+ I mean, ikaw nalng ung bumubuhayyy sakinn sa kalagitnaan ng suicidal thoughts ko BWHAVAHHAAV hindii na lovee.
+  Hindii ko kasi mapigilan mag isip ng kung ano ano lalo na pag stress ako. Peroo thankkk youu so muchh po for the 
+  effortt and for the wordss na binibigay mo sakin just to make me feel better. 
+Babalikk tayo sa confee po. Babawiin natin ung time na na consume ko dito sa bicol ng wla ka BBWHAHABAHWV promisseee ko ngaa yunn.
+Para sa 6th monthsarry.
+I'm alwayss here po para sayo. Sabihin mo lang pangalan ko lilipad ako dyan ehhee
+Ayunnn. Thankk youu so veryy muchh din po for existing HAAAA thankk you kay tita kasi 
+ang ganda ng product nya😇 gawa na din tayo. Charizz
+Lovee loveee. Ako si Kristine nangangakongg hindii na magpapasawayy ulit!! 
+I LOVEE YOUU SO VERYY MUCHHH PO!! PARA SA IBANG MESSAGE, WAITT MO. BAKA MAY PAHABOL BWHAHAHA WLA PAKONG MAISIP
+
+love i think may sinabi pa ako nyan, butt si messenger ayaw akong patapusin huhu. ILOVEOYUUUSOMUCHHH BABBYYY KO.
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="chapter-modal" id="chapter7">
+
+    <div class="chapter-letter">
+
+        <button class="close-chapter" onclick="closeChapter('chapter7')">×</button>
+
+        <div class="letter-small">CHAPTER SEVEN</div>
+
+        <h2>The Days We Shared</h2>
+
+        <div class="letter-date">
+            Ordinary days, special memories...
+        </div>
+
+        <div class="letter-content">
+HAPPY 7TH MONTHSARRY PO LOVE!!!!!
+
+I don't know how to make it up to youu sa lahat ng monthsarry natinn na wala akong gifts😇 let them be (Babawiin ko yun).
+ Thank youu always po for staying thiss longg sakin!!! I hopee na mag stay kapa hanggang sa pagsawaan mo na ako.
+I really don't know what to say na love HWHSHAHAH  I really appreciate you po sa lahat ng bagayy! You never fail 
+to make me proudd po!!! Wala na akong mahihiling pa kay lord ehh, ayy meron pala.
+Na sana (I hope) ma accept tayo ng both of our families. Yun langg sana ohh haysttt. Gustoo ko na tlaga pagsigawann
+ na lovee na lovee kitaa kasoo kasii ang malas ko sa family ko ehhh, di nilaa support yung kasiyahan ko.
+I also hope na hindi ka magsawa sakin po!! Wagg moko pag sasawaan kahitt kung ano ano nalng pinagsasabi ko love BWHAHHAAHAH
+Thankk youu lovee for everything!! I LOVEE YOU SO MUCHHH AND I WILL ALWAYSS LOVEE YOU THE WAY I ALWAYSS DO!!.
+Take care of yourself always po ahh? I can't take care of youu pa eh. Anlayo mo kasi.
+Stopp skipping meals na love every lunch or dinner pls? Kahit kumain ka nalng ng ontii basta may laman yang tyan mo po.
+ Pero much better if madami🥰 kasii andami mo pang work ehh. ayunn langg po!!! STAYYY PRETTYYYY MY LOVEE!!! 
+ ILOVEEEYOUUUUSOVERYYMUCHHHHH!!! I LOVE YOUU FURTHER THAN FOREVER!!
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="chapter-modal" id="chapter8">
+
+    <div class="chapter-letter">
+
+        <button class="close-chapter" onclick="closeChapter('chapter8')">×</button>
+
+        <div class="letter-small">CHAPTER EIGHT</div>
+
+        <h2>Right Here, Right Now</h2>
+
+        <div class="letter-date">
+            This version of us...
+        </div>
+
+        <div class="letter-content">
+HAPPYY 8TH MONTHSARY MYY LOVEEYYY BABYYY!!
+Shempre of course I have a long message. Di ako nauubusan ng sasabihin ehh.
+Thank you po for everythingg my loveee. Thankk you for the love, time, efforts, misunderstandings,
+ conflicts, and thank you for existing and becoming part of my daily life. 
+IMISSYOUUU NA ALREADYYY.
+I hope you're doing well po everyday.
+I hopee lifee isn't so hard on you love, and so as yourself.
+Keep on doing things that you love po, even on things that you hate (ehem SA). 
+I'm always here for you po no matter what happens love. I'm waiting po everytime na busy ka. 
+Too bad nag wawait ka rin sakinn kahit busy busyhan ako HEHEHSHHASH Sorry lovee. 
+Sorry po sa lahat ng problems na binigay ko sayo kahit na simpleng problema lang sya.
+ Yung pag ooverthink, accusations andd misunderstandings BWHAHBWHSHD
+Cheers to the 8th monthsary love, I hope you're still enjoying your life with me.
+Bear with me love sa lahat ng problems na ibibigay/ibinigay ko sayo po hehe, ang gulo gulo ko pa naman pag dating sa ganyan. 
+I'm hoping, expecting, and wishing that in the future, sabay natin i aachieve lahat ng bagay na pangarap natin ngayon. 
+Don't worry love, I won't let myself naman be a person or a partner na wlang job or money (Sa ngayon wla tlaga).
+
+ILOVEEEEEEEYOUUUUSOMUCHHH PO.
+Wag na wag kang magsasawa sakin lovee haa? Alwayss rememberrrr na I'm alwayss here whenever you need me.
+
+Problems? Achievements? Grades? Failures? Jobs? SUREEE I'M HERERR. I'M WILLING TO LISTENN PO SA LAHAT NG SASABIHIN MO
+ (EXCEPT SA CRUSHES MO HA. I KEEP MO YAN) 
+ILOVEEEEYOUUUJSUPERRDUPERRBERRYYVERYYMJCHHH
+Alwayss take care of yourself po.
+Alwayss remember to drink enough water, Have some enough sleep, Eattt at the rightt time anddd Lovee meeee too and yourselfff moree. 
+paniss ka love, galing yan lahat sa heart ko. Nag iimprove na englishh ko love, pedeng pa kiss??
+
+HAHHAHAHHAHAH fprgive my attitude love i nagiging immature ako kapag nag seselos. hindi kasi controlled ng utak ko sorry.
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="chapter-modal" id="chapter9">
+
+    <div class="chapter-letter">
+
+        <button class="close-chapter" onclick="closeChapter('chapter9')">×</button>
+
+        <div class="letter-small">CHAPTER NINE</div>
+
+        <h2>To Be Continued...</h2>
+
+        <div class="letter-date">
+            This isn't goodbye...
+        </div>
+
+        <div class="letter-content">
+HAPPY 9th Monthsarry po lovee.
+Sorry po for cancelling ung planss natin todayy.
+Pero lovee gusto ko parinn mag Gala ngaa. Bakitt ba iniisip mo di lang tayo nakagala now, di na tayo mag gagala sa susunod? Wala ka ng Tiwala sakin dibaa?
+Hayst.
+Thank you sa lahat lahat din po. Thankk you din sa pag titiis sakin and for being understanding kahit na alam kong galit ka.
+ILOVEEYOUUSOMUCHH PO
+
+this was the time na hindi natin natuloy gala becausee of me.. sorry po. sobrang bigat nung days nayan sakin ehh before HAHAHAH
+i hope nag enjoy ka naman sa letterr po na binigay ko lovey. ILOVEEYOUUUSOMUCHHH ALWAYS ANDD FOREVER.
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =========================
+   LOGO INTRO
+========================= */
+
+window.addEventListener("load", function(){
+
+    setTimeout(function(){
+
+        document.getElementById("logoScreen").style.opacity = "0";
+
+        setTimeout(function(){
+
+            document.getElementById("logoScreen").style.display = "none";
+            document.getElementById("intro").style.display = "flex";
+
+        },1000);
+
+    },3000);
+
+});
+
+
+/* =========================
+   INTRO TO PASSWORD
+========================= */
+
+function showLock(){
+
+    document.getElementById("intro").style.display = "none";
+
+    document.getElementById("lockScreen").style.display = "flex";
+
+}
+
+
+/* =========================
+   PASSWORD
+========================= */
+
+function checkPassword(){
+
+    const password =
+    document.getElementById("password").value;
+
+    if(password === "111425"){
+
+        document.getElementById("lockScreen").style.display = "none";
+
+        document.getElementById("main").style.display = "block";
+
+    }else{
+
+        document.getElementById("error").innerText =
+        "Wrong password 😭 Try again.";
+
+    }
+
+}
+
+
+/* ENTER KEY PASSWORD */
+
+document.addEventListener("keydown", function(event){
+
+    if(event.key === "Enter"){
+
+        if(document.getElementById("lockScreen").style.display === "flex"){
+
+            checkPassword();
+
+        }
+
+    }
+
+});
+
+
+/* =========================
+   OPEN CHAPTER
+========================= */
+
+function openChapter(id){
+
+    const chapter = document.getElementById(id);
+
+    if(chapter){
+
+        chapter.style.display = "flex";
+
+        document.body.style.overflow = "hidden";
+
+    }
+
+}
+
+
+/* =========================
+   CLOSE CHAPTER
+========================= */
+
+function closeChapter(id){
+
+    const chapter = document.getElementById(id);
+
+    if(chapter){
+
+        chapter.style.display = "none";
+
+        document.body.style.overflow = "auto";
+
+    }
+
+}
+
+
+/* CLICK OUTSIDE LETTER */
+
+document.querySelectorAll(".chapter-modal").forEach(function(modal){
+
+    modal.addEventListener("click", function(event){
+
+        if(event.target === modal){
+
+            modal.style.display = "none";
+
+            document.body.style.overflow = "auto";
+
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   TINY GAMES DATA
+========================================= */
+
+const games = [
+
+    {
+        question: "What do I treasure the most?",
+        hint: "This one should be easy... 🤎",
+
+        options: [
+            "Our memories together 🤎",
+            "Expensive things",
+            "My phone",
+            "Money"
+        ],
+
+        answer: 0
+    },
+
+
+    {
+        question: "What would I choose on a random day?",
+        hint: "Hmmmm... 🤔",
+
+        options: [
+            "MYY BABYYY",
+            "A million pesos",
+            "Ice cream",
+            "Doing absolutely nothing"
+        ],
+
+        answer: 0
+    },
+
+
+    {
+        question: "Which one describes our memories best?",
+        hint: "Think about the little things...",
+
+        options: [
+            "Misunderstandings",
+            "Misunderstandings",
+            "Boring",
+            "I don't remember"
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        question: "What makes a simple moment special?",
+        hint: "The answer is closer than you think...",
+
+        options: [
+            "Expensive places",
+            "Fancy things",
+            "My baby reyvian",
+            "Taking 500 pictures"
+        ],
+
+        answer: 2
+    },
+
+
+    {
+        question: "Last question... ready?",
+        hint: "Don't mess this up 😭",
+
+        options: [
+            "YES 🤎",
+            "Maybe",
+            "I give up",
+            "NO"
+        ],
+
+        answer: 0
+    }
+
+];
+
+
+/* =========================================
+   GAME VARIABLES
+========================================= */
+
+let currentGame = 0;
+let score = 0;
+let answered = false;
+
+
+/* =========================================
+   LOAD GAME
+========================================= */
+
+function loadGame(){
+
+    const game = games[currentGame];
+
+    document.getElementById("gameNumber").innerText =
+        "GAME " + String(currentGame + 1).padStart(2,"0");
+
+    document.getElementById("question").innerText =
+        game.question;
+
+    document.getElementById("hint").innerText =
+        game.hint;
+
+    document.getElementById("gameResult").innerText = "";
+
+    document.getElementById("nextGame").style.display = "none";
+
+    const options =
+        document.getElementById("options");
+
+    options.innerHTML = "";
+
+    game.options.forEach((option,index)=>{
+
+        const button = document.createElement("button");
+
+        button.innerText = option;
+
+        button.onclick = function(){
+
+            answer(index);
+
+        };
+
+        options.appendChild(button);
+
+    });
+
+    answered = false;
+
+}
+
+
+/* =========================================
+   ANSWER
+========================================= */
+
+function answer(selected){
+
+    if(answered) return;
+
+    answered = true;
+
+    const game = games[currentGame];
+
+    const buttons =
+        document.querySelectorAll(".game-options button");
+
+    buttons.forEach(button=>{
+        button.disabled = true;
+    });
+
+
+    if(selected === game.answer){
+
+        score++;
+
+        document.getElementById("score").innerText =
+            score;
+
+        document.getElementById("gameResult").innerHTML =
+            "CORRECT!!! YEHEYYYY 🥳🤎";
+
+        showResultVideo(true);
+
+    }
+
+    else{
+
+        document.getElementById("gameResult").innerHTML =
+            "AYYYYY WRONG 😭😡";
+
+        showResultVideo(false);
+
+    }
+
+}
+
+
+/* =========================================
+   SHOW VIDEO
+========================================= */
+
+function showResultVideo(correct){
+
+    const modal =
+        document.getElementById("gameVideoModal");
+
+    const video =
+        document.getElementById("resultVideo");
+
+    const source =
+        document.getElementById("videoSource");
+
+    const title =
+        document.getElementById("videoTitle");
+
+    const emoji =
+        document.getElementById("videoEmoji");
+
+    const message =
+        document.getElementById("videoMessage");
+
+
+    if(correct){
+
+        /*
+        ======================================
+        PALITAN ITO NG HAPPY VIDEO FILE
+        ======================================
+        */
+
+        source.src = "yehey.mp4";
+
+        title.innerText =
+            "YEHEYYYY! 🥳";
+
+        emoji.innerText =
+            "🎉🤎";
+
+        message.innerText =
+            "You actually got it right!!!";
+
+    }
+
+    else{
+
+        /*
+        ======================================
+        PALITAN ITO NG ANGRY VIDEO FILE
+        ======================================
+        */
+
+        source.src = "angry.mp4";
+
+        title.innerText =
+            "EXCUSE ME?! 😭";
+
+        emoji.innerText =
+            "😡💢";
+
+        message.innerText =
+            "WRONG ANSWER. HOW DARE YOU. 😭";
+
+    }
+
+
+    video.load();
+
+    modal.style.display = "flex";
+
+    document.body.style.overflow = "hidden";
+
+}
+
+
+/* =========================================
+   CLOSE VIDEO
+========================================= */
+
+function closeVideo(){
+
+    const modal =
+        document.getElementById("gameVideoModal");
+
+    const video =
+        document.getElementById("resultVideo");
+
+    video.pause();
+
+    modal.style.display = "none";
+
+    document.body.style.overflow = "auto";
+
+}
+
+
+/* =========================================
+   CONTINUE
+========================================= */
+
+function continueAfterVideo(){
+
+    closeVideo();
+
+    document.getElementById("nextGame").style.display =
+        "inline-block";
+
+}
+
+
+/* =========================================
+   NEXT GAME
+========================================= */
+
+function nextGame(){
+
+    if(currentGame < games.length - 1){
+
+        currentGame++;
+
+        loadGame();
+
+    }
+
+    else{
+
+        finishGames();
+
+    }
+
+}
+
+
+/* =========================================
+   FINISH
+========================================= */
+
+function finishGames(){
+
+    document.getElementById("gameBox").innerHTML = `
+
+        <div class="game-number">
+            ALL GAMES COMPLETED
+        </div>
+
+        <h3>
+            You finished everything! 🥹🤎
+        </h3>
+
+        <p style="
+            margin-top:20px;
+            font-family:'Cormorant Garamond',serif;
+            font-size:22px;
+        ">
+
+            Your final score is...
+
+        </p>
+
+        <div style="
+            font-family:'Cormorant Garamond',serif;
+            font-size:55px;
+            margin-top:15px;
+            color:#6b4f3b;
+        ">
+
+            ${score} / ${games.length}
+
+        </div>
+
+        <p style="
+            margin-top:15px;
+            color:#96745c;
+        ">
+
+            ${score === games.length
+                ? "PERFECT SCORE!!! YEHEYYYY 🥳🤎"
+                : "Not bad... but you can try again 😭🤎"
+            }
+
+        </p>
+
+    `;
+
+}
+
+
+/* =========================================
+   START GAME
+========================================= */
+
+loadGame();
+
+</script>
+
+</body>
+</html>
